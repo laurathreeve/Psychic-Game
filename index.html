@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Word Psychic Game!</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="script" href="assets/javascript/game.js"> -->
+    </head>
+    <body>
+       <h1>Guess What Letter I'm Thinking Of</h1>
+       <p id="wins"> Wins: 0</p>
+       <p id="losses">Losses: 0</p>
+       <p id="guesses-left">Guesses Left: 10</p>
+       <p id="letters-guessed">Letters Guessed: </p>
+    </body>
+</html>
+<script>
+var letters = ["a","b","c","d", "e", "f","g","h","i","j","k","l","m","n","o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var wins = 0; 
+var losses = 0;
+var guessesLeft = 10;
+var lettersGuessed =[];
+var remainingGuesses =[];
+var winsText = document.getElementById("wins");
+var lossesText = document.getElementById("losses");
+var guessesLeftText = document.getElementById("guesses-left");
+var lettersGuessedText = document.getElementById("letters-guessed");
+
+var computerGuess = letters [Math.floor(Math.random()* letters.length)];
+console.log (computerGuess);
+
+document.onkeypress = function(event) {
+    userGuess = event.key;
+    if (userGuess == computerGuess) {
+        handleGameWon();
+    }
+    else {
+        guessesLeft--;
+        lettersGuessed.push(userGuess);
+        guessesLeftText.textContent = "Guesses Left: " + guessesLeft;
+        lettersGuessedText.textContent = "Letters Guessed: " + lettersGuessed;
+        if (guessesLeft == 0) {
+            handleGameLost ();
+        }
+    
+
+    }
+}
+
+function handleGameWon () {
+    alert ("You Won!");
+    wins++;
+    winsText.textContent = "Wins: " + wins;
+    console.log (winsText.textContent);
+    guessesLeft = 10;
+    lettersGuessed = [];
+    guessesLeftText.textContent = "Guesses Left: " + guessesLeft;
+    lettersGuessedText.textContent = "Letters Guessed: ";
+
+
+
+}
+function handleGameLost (){
+    alert ("You Lost!");
+    losses++;
+    lossesText.textContent = "Losses: " + losses;
+    guessesLeft = 10;
+    letterGuessed = [];
+    guessesLeftText.textContent = "Guesses Left: " + guessesLeft;
+    lettersGuessedText.textContent = "Letters Guessed: ";
+}
+</script>
+
+
